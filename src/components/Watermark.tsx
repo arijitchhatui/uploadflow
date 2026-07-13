@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useFullscreen } from '../hooks/useFullscreen';
 import { watermark } from '../lib/watermark';
 import { WatermarkSettings } from '../settings/UploadFlowSettings';
 import type { FileTransformer } from '../types/File';
 import { formatBytes } from '../utils/helpers';
-import { useFullscreen } from '../hooks/useFullscreen';
 import { FullscreenButton } from './FullscreenButton';
 import { ObjectUrlImage } from './ObjectUrlImage';
 
@@ -62,14 +62,12 @@ export function Watermark({ file, onSave, onCancel, config, onApplyAll }: Waterm
   );
 
   useEffect(() => {
-    if (!text.trim()) return;
-
     let cancelled = false;
     const timer = window.setTimeout(() => {
       setLoading(true);
       const options = currentOptions();
 
-      void watermark(file, options)
+      watermark(file, options)
         .then((watermarkedFile) => {
           if (cancelled) return;
           setOutput(watermarkedFile);
@@ -213,10 +211,14 @@ export function Watermark({ file, onSave, onCancel, config, onApplyAll }: Waterm
               Updating preview…
             </div>
           )}
-          {text.trim() && output ? (
-            <ObjectUrlImage file={output} alt="Watermark preview" className={isFullscreen ? 'max-h-full max-w-full object-contain' : 'max-h-72 max-w-full object-contain'} />
+          {output ? (
+            <ObjectUrlImage
+              file={output}
+              alt="Watermark preview"
+              className={isFullscreen ? 'max-h-full max-w-full object-contain' : 'max-h-72 max-w-full object-contain'}
+            />
           ) : (
-            <span className="text-xs text-slate-500">Enter text to preview the watermark.</span>
+            <span className="text-xs text-slate-500">Preparing image preview…</span>
           )}
         </div>
       </div>

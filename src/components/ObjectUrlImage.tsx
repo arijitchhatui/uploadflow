@@ -44,21 +44,27 @@ function releaseObjectUrl(blob: Blob, cached: CachedObjectUrl): void {
 
 interface ObjectUrlImageProps extends Omit<ComponentProps<'img'>, 'ref' | 'src'> {
   file: Blob;
+  onDimLoad?: (dim: { width: number; height: number }) => void;
 }
 
-export function ObjectUrlImage({ file, ...imageProps }: ObjectUrlImageProps) {
+export function ObjectUrlImage({ file, onDimLoad, ...imageProps }: ObjectUrlImageProps) {
   const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const cached = acquireObjectUrl(file);
     const image = imageRef.current;
-    if (image) image.src = cached.url;
+    if (image) {
+      image.src = cached.url;
+      image.onload = () => {
+        onDimLoad?.({ width: image?.naturalWidth || 0, height: image?.naturalHeight || 0 });
+      };
+    }
 
     return () => {
       if (image) image.removeAttribute('src');
       releaseObjectUrl(file, cached);
     };
-  }, [file]);
+  }, [file, onDimLoad]);
 
   return <img ref={imageRef} {...imageProps} />;
 }

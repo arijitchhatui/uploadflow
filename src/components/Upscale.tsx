@@ -19,8 +19,11 @@ interface UpscaleProps {
 export const Upscale: React.FC<UpscaleProps> = ({ file, onSave, onCancel, config, onApplyAll }) => {
   const [upscaleFactor, setUpscaleFactor] = useState<number>(config?.upscaleFactor ?? 2);
   const [isUpscaling, setIsUpscaling] = useState<boolean>(false);
+  const [inputDim, setInputDim] = useState<{ width: number; height: number } | null>(null);
+  const [outputDim, setOutputDim] = useState<{ width: number; height: number } | null>(null);
   const [upscaledFile, setUpscaledFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
+
   const { elementRef: comparisonRef, isFullscreen, toggleFullscreen } = useFullscreen<HTMLDivElement>();
 
   const upscaleFile: FileTransformer = async (input) => {
@@ -145,13 +148,16 @@ export const Upscale: React.FC<UpscaleProps> = ({ file, onSave, onCancel, config
           <div className="grid min-h-0 flex-1 grid-cols-2 gap-3">
             <div className="flex min-w-0 flex-col overflow-hidden rounded-lg border border-slate-800 bg-slate-900/60">
               <div className={`relative flex items-center justify-center overflow-hidden p-2 ${isFullscreen ? 'min-h-80 flex-1' : 'h-56'}`}>
-                <ObjectUrlImage file={file} alt="Original input" className="max-h-full max-w-full object-contain" />
+                <ObjectUrlImage file={file} alt="Original input" className="max-h-full max-w-full object-contain" onDimLoad={setInputDim} />
                 <span className="absolute left-2 top-2 rounded-md border border-slate-700 bg-slate-950/80 px-2 py-1 text-[10px] font-semibold text-slate-300">
                   Original
                 </span>
               </div>
               <div className="flex items-center justify-between gap-2 border-t border-slate-800 px-3 py-2">
                 <span className="truncate text-[10px] text-slate-500">{file.name}</span>
+                <span className="truncate text-[10px] text-slate-500">
+                  {inputDim ? `${inputDim.width} × ${inputDim.height}` : 'Dimensions not available'}
+                </span>
                 <span className="shrink-0 font-mono text-xs font-semibold text-slate-200">{formatBytes(file.size)}</span>
               </div>
             </div>
@@ -159,11 +165,21 @@ export const Upscale: React.FC<UpscaleProps> = ({ file, onSave, onCancel, config
             <div className="flex min-w-0 flex-col overflow-hidden rounded-lg border border-slate-800 bg-slate-900/60">
               <div className={`relative flex items-center justify-center overflow-hidden p-2 ${isFullscreen ? 'min-h-80 flex-1' : 'h-56'}`}>
                 {upscaledFile ? (
-                  <ObjectUrlImage file={upscaledFile} alt="Upscaled result" className="max-h-full max-w-full object-contain" />
+                  <ObjectUrlImage
+                    file={upscaledFile}
+                    alt="Upscaled result"
+                    className="max-h-full max-w-full object-contain"
+                    onDimLoad={setOutputDim}
+                  />
                 ) : (
                   <div className="flex flex-col items-center gap-2 px-4 text-center">
                     <svg className="h-7 w-7 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4-4 4 4 3-3 5 5M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M4 16l4-4 4 4 3-3 5 5M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
                     </svg>
                     <span className="text-xs text-slate-500">Run the upscaler to generate the comparison.</span>
                   </div>
@@ -180,7 +196,9 @@ export const Upscale: React.FC<UpscaleProps> = ({ file, onSave, onCancel, config
                 </span>
               </div>
               <div className="flex items-center justify-between gap-2 border-t border-slate-800 px-3 py-2">
-                <span className="text-[10px] text-slate-500">Generated result</span>
+                <span className="text-[10px] tracking-tighter text-slate-500">
+                  {outputDim ? `${outputDim.width} × ${outputDim.height}` : 'Dimensions not available'}
+                </span>
                 <span className="shrink-0 font-mono text-xs font-semibold text-emerald-400">
                   {upscaledFile ? formatBytes(upscaledFile.size) : 'Not generated'}
                 </span>

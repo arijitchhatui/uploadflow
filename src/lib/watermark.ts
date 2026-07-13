@@ -75,14 +75,18 @@ const drawCanvas = (image: ImageBitmap, options: WatermarkSettings) => {
     ctx.textAlign = options.position.endsWith('left') ? 'left' : options.position.endsWith('right') ? 'right' : options.textAlign;
   }
 
-  const lines = options.text.replace(/\r\n?/g, '\n').split('\n');
-  const lineHeight = options.fontSize * 1.2;
-  const totalHeight = options.fontSize + Math.max(0, lines.length - 1) * lineHeight;
-  let lineY = getBlockTop(options.position, y, totalHeight, options.textBaseline);
+  const normalizedText = options.text?.replace(/\r\n?/g, '\n') ?? '';
+  const lines = normalizedText ? normalizedText.split('\n') : [];
 
-  for (const line of lines) {
-    ctx.fillText(line, x, lineY);
-    lineY += lineHeight;
+  if (lines?.length) {
+    const lineHeight = options.fontSize * 1.2;
+    const totalHeight = options.fontSize + Math.max(0, lines.length - 1) * lineHeight;
+    let lineY = getBlockTop(options.position, y, totalHeight, options.textBaseline);
+
+    for (const line of lines) {
+      ctx.fillText(line, x, lineY);
+      lineY += lineHeight;
+    }
   }
 
   return canvas;
