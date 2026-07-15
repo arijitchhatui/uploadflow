@@ -1,12 +1,13 @@
 import {
   PAGE_INTERCEPTOR_SOURCE,
   type PageInterceptorKind,
-  type PageInterceptorReady,
+  type PageInterceptorState,
   type PageInterceptorRequest,
   type PageInterceptorResponse
 } from '../types/PageInterceptor';
 
 let bridgeReady = false;
+let interceptionEnabled = false;
 const processedFiles = new WeakSet<File>();
 const userSelectedFiles = new WeakSet<File>();
 
@@ -17,12 +18,15 @@ interface FileInterceptionResult {
 
 window.addEventListener('message', (event: MessageEvent<unknown>) => {
   if (event.source !== window || !event.data || typeof event.data !== 'object') return;
-  const message = event.data as Partial<PageInterceptorReady>;
-  if (message.source === PAGE_INTERCEPTOR_SOURCE && message.type === 'READY') bridgeReady = true;
+  const message = event.data as Partial<PageInterceptorState>;
+  if (message.source === PAGE_INTERCEPTOR_SOURCE && message.type === 'STATE' && typeof message.enabled === 'boolean') {
+    bridgeReady = true;
+    interceptionEnabled = message.enabled;
+  }
 });
 
 function interceptFiles(kind: PageInterceptorKind, files: File[]): Promise<FileInterceptionResult> {
-  if (!bridgeReady || !files.length) return Promise.resolve({ files, cancelled: false });
+  if (!bridgeReady || !interceptionEnabled || !files.length) return Promise.resolve({ files, cancelled: false });
 
   const pendingFiles = files.filter((file) => !processedFiles.has(file));
   if (!pendingFiles.length) return Promise.resolve({ files, cancelled: false });
@@ -81,6 +85,7 @@ function registerFileInputInterceptor(): void {
     const input = event.target;
     if (
       !bridgeReady ||
+      !interceptionEnabled ||
       !event.isTrusted ||
       (event as BypassFileInputEvent)._ufBypass ||
       !(input instanceof HTMLInputElement) ||
@@ -135,6 +140,7 @@ function registerClipboardReadInterceptor(): void {
   const originalRead = clipboard.read.bind(clipboard);
 
   clipboard.read = async (...args) => {
+    if (!interceptionEnabled) return originalRead(...args);
     const items = await originalRead(...args);
     const imageFiles: File[] = [];
     const passthroughItems: ClipboardItem[] = [];
@@ -163,7 +169,7 @@ function registerXhrInterceptor(): void {
   const originalSend = XMLHttpRequest.prototype.send;
 
   XMLHttpRequest.prototype.send = function (body?: Document | XMLHttpRequestBodyInit | null): void {
-    if (!(body instanceof FormData) || !bridgeReady) {
+    if (!(body instanceof FormData) || !bridgeReady || !interceptionEnabled) {
       originalSend.call(this, body);
       return;
     }
@@ -201,7 +207,7 @@ function registerFetchInterceptor(): void {
 
   window.fetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
     const body = init?.body;
-    if (!(body instanceof FormData) || !bridgeReady) return originalFetch(input, init);
+    if (!(body instanceof FormData) || !bridgeReady || !interceptionEnabled) return originalFetch(input, init);
 
     const entries: Array<[string, FormDataEntryValue]> = [];
     const files: File[] = [];
@@ -239,13 +245,14 @@ function registerFilePickerInterceptor(): void {
   if (originalPicker) {
     pickerWindow.showOpenFilePicker = async (...args: Parameters<ShowOpenFilePicker>) => {
       const handles = await originalPicker(...args);
+      if (!interceptionEnabled) return handles;
       handles.forEach((handle) => selectedHandles.add(handle));
       return handles;
     };
   }
 
   FileSystemFileHandle.prototype.getFile = async function (): Promise<File> {
-    if (!selectedHandles.has(this)) return originalGetFile.call(this);
+    if (!interceptionEnabled || !selectedHandles.has(this)) return originalGetFile.call(this);
 
     const existingFile = filesByHandle.get(this);
     if (existingFile) return existingFile;

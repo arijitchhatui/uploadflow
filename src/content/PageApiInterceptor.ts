@@ -3,27 +3,32 @@ import type { ExtensionConfig } from '../types/Message';
 import {
   PAGE_INTERCEPTOR_SOURCE,
   type PageInterceptorKind,
-  type PageInterceptorReady,
   type PageInterceptorRequest,
   type PageInterceptorResponse
 } from '../types/PageInterceptor';
+import type { InterceptionState } from './InterceptionState';
 import type { OverlayManager } from './OverlayManager';
 
 export class PageApiInterceptor {
   private readonly kinds: PageInterceptorKind[];
   private readonly overlayManager: OverlayManager;
   private readonly messageService: MessageService;
+  private readonly interceptionState: InterceptionState;
 
-  constructor(kinds: PageInterceptorKind | PageInterceptorKind[], overlayManager: OverlayManager, messageService: MessageService) {
+  constructor(
+    kinds: PageInterceptorKind | PageInterceptorKind[],
+    overlayManager: OverlayManager,
+    messageService: MessageService,
+    interceptionState: InterceptionState
+  ) {
     this.kinds = Array.isArray(kinds) ? kinds : [kinds];
     this.overlayManager = overlayManager;
     this.messageService = messageService;
+    this.interceptionState = interceptionState;
   }
 
   register(): void {
     window.addEventListener('message', this.handleMessage);
-    const ready: PageInterceptorReady = { source: PAGE_INTERCEPTOR_SOURCE, type: 'READY' };
-    window.postMessage(ready, '*');
   }
 
   unregister(): void {
@@ -45,7 +50,7 @@ export class PageApiInterceptor {
     if (event.source !== window || !this.isRequest(event.data) || !this.kinds.includes(event.data.kind)) return;
 
     const { id, files } = event.data;
-    if (!files.length) {
+    if (!files.length || !this.interceptionState.enabled) {
       this.respond(id, files);
       return;
     }
@@ -53,7 +58,7 @@ export class PageApiInterceptor {
     void this.messageService
       .send<ExtensionConfig>({ type: 'GET_CONFIG' })
       .then((config) => {
-        if (!config?.settings?.generalSettings?.enableUploadFlow) {
+        if (!(config.isEnabled ?? true) || !config?.settings?.generalSettings?.enableUploadFlow) {
           this.respond(id, files);
           return;
         }

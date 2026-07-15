@@ -3,22 +3,26 @@ import { ContentController } from './ContentController';
 import { DragDropInterceptor } from './DragDropInterceptor';
 import { FileChangeInterceptor } from './FileChangeInterceptor';
 import { FileInputInterceptor } from './FileInputInterceptor';
+import { InterceptionState } from './InterceptionState';
 import { OverlayManager } from './OverlayManager';
 import { PageApiInterceptor } from './PageApiInterceptor';
 import { PasteInterceptor } from './PasteInterceptor';
 
 const overlayManager = new OverlayManager();
 const messageService = new MessageService();
+const interceptionState = new InterceptionState(messageService);
 const pageApiInterceptor = new PageApiInterceptor(
   ['file-input', 'clipboard-read', 'fetch-send', 'xhr-send', 'file-handle-get-file'],
   overlayManager,
-  messageService
+  messageService,
+  interceptionState
 );
 
 new ContentController(
-  new FileInputInterceptor(overlayManager, messageService),
+  interceptionState,
+  new FileInputInterceptor(overlayManager, messageService, interceptionState),
   new FileChangeInterceptor(),
-  new DragDropInterceptor(overlayManager, messageService),
-  new PasteInterceptor(overlayManager, messageService),
+  new DragDropInterceptor(overlayManager, messageService, interceptionState),
+  new PasteInterceptor(overlayManager, messageService, interceptionState),
   pageApiInterceptor
 ).initialize();

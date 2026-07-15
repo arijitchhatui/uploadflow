@@ -1,16 +1,19 @@
 import type { MessageService } from '../services/MessageService';
 import type { ExtensionConfig } from '../types/Message';
 import { FileBypass } from './FileBypass';
+import type { InterceptionState } from './InterceptionState';
 import type { OverlayManager } from './OverlayManager';
 
 export class FileInputInterceptor {
   private readonly overlayManager: OverlayManager;
   private readonly messageService: MessageService;
+  private readonly interceptionState: InterceptionState;
   private readonly pendingInputs = new WeakSet<HTMLInputElement>();
 
-  constructor(overlayManager: OverlayManager, messageService: MessageService) {
+  constructor(overlayManager: OverlayManager, messageService: MessageService, interceptionState: InterceptionState) {
     this.overlayManager = overlayManager;
     this.messageService = messageService;
+    this.interceptionState = interceptionState;
   }
 
   register(): void {
@@ -27,7 +30,7 @@ export class FileInputInterceptor {
 
     if (FileBypass.consumeProcessedInput(input)) return;
     if (FileBypass.isBypassInput(event)) return;
-    if (!event.isTrusted) return;
+    if (!this.interceptionState.enabled || !event.isTrusted) return;
 
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -53,7 +56,7 @@ export class FileInputInterceptor {
     void this.messageService
       .send<ExtensionConfig>({ type: 'GET_CONFIG' })
       .then((config) => {
-        if (!config?.settings?.generalSettings?.enableUploadFlow) {
+        if (!(config.isEnabled ?? true) || !config?.settings?.generalSettings?.enableUploadFlow) {
           replay(files);
           return;
         }

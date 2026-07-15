@@ -39,7 +39,7 @@ const toSandboxFiles = (files: File[]): SandboxFile[] =>
   }));
 
 export default function App({ initialFiles = [], initialSettings, onComplete, onCancel }: AppProps) {
-  const isOverlay = Boolean(onComplete && onCancel);
+  const isOverlay = Boolean(initialSettings && onComplete && onCancel);
   const [activeTab, setActiveTab] = useState<AppTabs>(isOverlay ? 'sandbox' : 'dashboard');
   const [stats, setStats] = useState<Stats>(defaultStats);
   const [settings, setSettings] = useState<UploadFlowSettings>(initialSettings ?? defaultSettings);
@@ -48,21 +48,25 @@ export default function App({ initialFiles = [], initialSettings, onComplete, on
   const [editingFile, setEditingFile] = useState<SandboxFile | null>(null);
 
   useEffect(() => {
-    if (isOverlay) return;
+    if (!isOverlay) {
+      Promise.all([
+        storageService.get<{ stats?: Stats; recentFiles?: RecentFile[] }>(['stats', 'recentFiles']),
+        configService.getConfig()
+      ]).then(([stored, config]) => {
+        if (stored.stats) setStats(stored.stats);
+        if (stored.recentFiles) setRecentFiles(stored.recentFiles);
+        setSettings(config);
+      });
+      return;
+    }
 
-    Promise.all([
-      storageService.get<{ settings?: UploadFlowSettings; stats?: Stats; recentFiles?: RecentFile[] }>([
-        'settings',
-        'stats',
-        'recentFiles'
-      ]),
-      configService.getConfig()
-    ]).then(([res, config]) => {
-      if (res.settings) setSettings(res.settings);
-      if (res.stats) setStats(res.stats);
-      if (res.recentFiles) setRecentFiles(res.recentFiles);
-      setSettings(config);
-    });
+    void messageService
+      .send<StatsSnapshot>({ type: 'GET_STATS' })
+      .then((snapshot) => {
+        setStats(snapshot.stats);
+        setRecentFiles(snapshot.recentFiles);
+      })
+      .catch(() => undefined);
   }, [isOverlay]);
 
   const updateSettings = (newSettings: Partial<typeof settings>) => {

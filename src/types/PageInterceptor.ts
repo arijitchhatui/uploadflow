@@ -18,7 +18,8 @@ export interface PageInterceptorResponse {
   cancelled: boolean;
 }
 
-export interface PageInterceptorReady {
+export interface PageInterceptorState {
   source: typeof PAGE_INTERCEPTOR_SOURCE;
-  type: 'READY';
+  type: 'STATE';
+  enabled: boolean;
 }

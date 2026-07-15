@@ -53,11 +53,24 @@ body {
   background-color: var(--background);
 }
 
+html.test-page,
 body.test-page {
   width: 100%;
   height: auto;
   min-height: 100svh;
   overflow: auto;
+}
+
+html.landing-page,
+body.landing-page {
+  width: 100%;
+  height: auto;
+  min-height: 100svh;
+  overflow: auto;
+}
+
+body.landing-page #root {
+  min-height: 100svh;
 }
 
 button, select, input { font: inherit; }

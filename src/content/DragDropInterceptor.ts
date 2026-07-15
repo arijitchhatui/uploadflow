@@ -1,15 +1,18 @@
 import type { MessageService } from '../services/MessageService';
 import type { ExtensionConfig } from '../types/Message';
 import { FileBypass } from './FileBypass';
+import type { InterceptionState } from './InterceptionState';
 import type { OverlayManager } from './OverlayManager';
 
 export class DragDropInterceptor {
   private readonly overlayManager: OverlayManager;
   private readonly messageService: MessageService;
+  private readonly interceptionState: InterceptionState;
 
-  constructor(overlayManager: OverlayManager, messageService: MessageService) {
+  constructor(overlayManager: OverlayManager, messageService: MessageService, interceptionState: InterceptionState) {
     this.overlayManager = overlayManager;
     this.messageService = messageService;
+    this.interceptionState = interceptionState;
   }
 
   register(): void {
@@ -21,7 +24,13 @@ export class DragDropInterceptor {
   }
 
   private readonly handleDrop = (event: DragEvent): void => {
-    if (FileBypass.isBypassDrop(event) || !event.dataTransfer?.files.length || !event.target) return;
+    if (
+      FileBypass.isBypassDrop(event) ||
+      !this.interceptionState.enabled ||
+      !event.dataTransfer?.files.length ||
+      !event.target
+    )
+      return;
 
     event.stopImmediatePropagation();
     event.preventDefault();
@@ -32,7 +41,7 @@ export class DragDropInterceptor {
     this.messageService
       .send<ExtensionConfig>({ type: 'GET_CONFIG' })
       .then((config) => {
-        if (!config?.settings?.generalSettings?.enableUploadFlow) {
+        if (!(config.isEnabled ?? true) || !config?.settings?.generalSettings?.enableUploadFlow) {
           FileBypass.drop(event, files, target);
           return;
         }

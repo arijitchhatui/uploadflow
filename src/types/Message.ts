@@ -3,6 +3,7 @@ import type { RecentFile } from './File';
 import type { Stats } from './Stats';
 
 export interface ExtensionConfig {
+  isEnabled?: boolean;
   settings: UploadFlowSettings;
 }
 
