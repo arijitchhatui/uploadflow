@@ -1,6 +1,7 @@
 import { UploadFlowIcon } from '../lib/icons';
 import { copyShareUrl, SHARE_URL, shareUploadFlow } from '../utils/share';
 import { toast } from '../utils/Toaster';
+import { LaunchCountdown } from './LaunchCountdown';
 
 const tools = [
   { number: '01', label: 'Optimize', copy: 'Resize, compress, and convert images before upload.', mark: '↗' },
@@ -179,6 +180,8 @@ export function LandingPage() {
             <span>Intercept</span><span>✦</span><span>Optimize</span><span>✦</span><span>Protect</span><span>✦</span><span>Return</span><span>✦</span><span>Upload with intent</span>
           </div>
         </div>
+
+        <LaunchCountdown />
 
         <section id="workflow" className="mx-auto w-full max-w-360 px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
           <div className="grid gap-12 lg:grid-cols-[.65fr_1.35fr]">
