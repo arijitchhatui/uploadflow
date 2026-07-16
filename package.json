@@ -1,0 +1,20 @@
+{
+  "name": "uploadflow",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@uploadflow/web",
+    "dev:web": "npm run dev --workspace=@uploadflow/web",
+    "dev:extension": "npm run dev --workspace=@uploadflow/extension",
+    "build": "npm run build:web && npm run build:extension",
+    "build:web": "npm run build --workspace=@uploadflow/web",
+    "build:extension": "npm run build --workspace=@uploadflow/extension",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "preview": "npm run preview --workspace=@uploadflow/web"
+  }
+}
