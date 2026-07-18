@@ -31,7 +31,7 @@ export function FeatureSection({ feature, index }: { feature: GuideFeature; inde
           </ul>
         </div>
         {feature.image && (
-          <figure className="overflow-hidden rounded-[24px] border border-white/15 bg-black/20 shadow-2xl">
+          <figure className="overflow-hidden rounded-3xl border border-white/15 bg-black/20 shadow-2xl">
             <img
               src={feature.image}
               alt={`${feature.title} ${feature.concept ? 'concept preview' : 'shown in UploadFlow'}`}

@@ -13,6 +13,143 @@ export interface GuideFeature {
   status?: ProductStatus;
 }
 
+export interface ConfigurationGuide {
+  id: string;
+  title: string;
+  summary: string;
+  choices: string[];
+}
+
+export const configurationGroups = [
+  {
+    id: 'uploadflow',
+    title: 'Upload interception',
+    summary:
+      'The main UploadFlow switch controls whether websites can be intercepted and whether UploadFlow can return reviewed files to their upload fields.',
+    choices: [
+      'Enable it when you want UploadFlow to handle file inputs, drops, paste actions, and supported page upload APIs.',
+      'Disable it to leave normal website upload behaviour untouched.',
+      'Disabling it also clears connected pending-draft tracking.'
+    ]
+  },
+  {
+    id: 'picker',
+    title: 'File input picker',
+    summary: 'Choose what opens when a website requests a file.',
+    choices: [
+      'UploadFlow URL picker: choose captured URLs, shelf items, or post-bundle media.',
+      'Computer picker: use Chrome’s normal local-file dialog.',
+      'This changes the starting source, not the destination website’s file requirements.'
+    ]
+  },
+  {
+    id: 'post-bundles',
+    title: 'Post Bundles',
+    summary:
+      'Combine ordered media with reusable post information so a complete content package can move together instead of rebuilding it on every website.',
+    choices: [
+      'Capture a supported webpage post or create a bundle from selected Media Shelf items.',
+      'Review the media order, title, caption, attribution, links, hashtags, cover role, and per-media alt text.',
+      'Insert the ordered media into a compatible multi-file input, then map supported text fields through a Site preset.',
+      'Unsupported text fields remain available for manual copy instead of being silently discarded.'
+    ]
+  },
+  {
+    id: 'language',
+    title: 'Language',
+    summary: 'Choose whether UploadFlow follows the browser language or uses a supported language explicitly.',
+    choices: ['System follows Chrome’s current locale.', 'A selected language remains active until you change it again.']
+  },
+  {
+    id: 'inspect',
+    title: 'Inspect Mode',
+    summary: 'Inspect Mode adds an UploadFlow action to media you deliberately hover on supported webpages.',
+    choices: [
+      'Turn it on when capturing authorized images, video, audio, or source URLs from webpages.',
+      'Turn it off when you do not want hover controls on ordinary browsing pages.',
+      'Inspect Mode only operates while UploadFlow itself is enabled.'
+    ]
+  },
+  {
+    id: 'image-defaults',
+    title: 'Image defaults',
+    summary: 'Set the format and quality UploadFlow should initially suggest when an image enters the optimization workflow.',
+    choices: [
+      'Auto optimize can prepare supported images without requiring the same initial choices each time.',
+      'Default format and quality are starting values; you can still review the result before continuing.'
+    ]
+  },
+  {
+    id: 'text-privacy',
+    title: 'Text privacy defaults',
+    summary: 'Choose which recognizable text patterns should be masked when text redaction is used.',
+    choices: [
+      'Email, phone, payment-card, and IPv4 detection can be enabled independently.',
+      'These options configure text redaction; image-region redaction remains a separate reviewed action.'
+    ]
+  },
+  {
+    id: 'watermark-defaults',
+    title: 'Watermark defaults',
+    summary: 'Save the watermark text and visual defaults you normally want UploadFlow to begin with.',
+    choices: [
+      'Configure text, position, font, size, colour, alignment, and baseline once.',
+      'The watermark workspace still shows a preview before the output is applied.'
+    ]
+  },
+  {
+    id: 'upscaling',
+    title: 'Upscaling',
+    summary: 'Control whether network-backed upscaling is available and which enlargement factor is selected initially.',
+    choices: [
+      'Keep it disabled if every preparation action must remain local.',
+      'Enable it only when you intend to send an image to the configured processing service.',
+      '2x and supported 4x options determine the initial resolution request.'
+    ]
+  },
+  {
+    id: 'site-presets',
+    title: 'Site presets',
+    summary:
+      'Describe how UploadFlow should prepare media and insert Post Bundle fields for specific destination websites or hostname patterns.',
+    choices: [
+      'Match exact hosts or wildcard host patterns.',
+      'Set file limits, filename templates, transforms, output format, quality, size, and optional branding.',
+      'Choose which preset is enabled when several saved rules exist.',
+      'Optional title, body, link, and hashtag selectors map only an explicitly inserted Post Bundle.',
+      'A Site preset prepares and fills a draft; it never submits or publishes the destination form.'
+    ]
+  },
+  {
+    id: 'brand-kits',
+    title: 'Brand kits',
+    summary: 'Store reusable visual identity choices for repeated creator or campaign work.',
+    choices: [
+      'Save names, usernames, websites, fonts, colours, logo placement, and watermark variants.',
+      'A destination preset or platform pack can reference a saved kit instead of rebuilding the same branding.'
+    ]
+  },
+  {
+    id: 'platform-packs',
+    title: 'Platform packs',
+    summary: 'Define a named set of output variants that should be generated together.',
+    choices: [
+      'Choose each variant’s dimensions, format, quality, watermark behaviour, and optional destination preset.',
+      'Use packs for repeatable square, portrait, landscape, preview, thumbnail, or high-quality deliverables.'
+    ]
+  },
+  {
+    id: 'media-memory',
+    title: 'Private Media Memory',
+    summary: 'Choose whether UploadFlow remembers explicit captures, transformations, versions, and deliveries as local workflow metadata.',
+    choices: [
+      'It is optional and does not record general browsing activity.',
+      'Choose a 7, 30, or 90-day retention period.',
+      'Export the local record, remove one destination’s history, or erase everything.'
+    ]
+  }
+] satisfies ConfigurationGuide[];
+
 export const featureGroups = [
   {
     id: 'capture',

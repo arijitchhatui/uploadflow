@@ -20,7 +20,7 @@ UploadFlow should feel simple: **it remembers your media so you do not have to.*
 4. **Recall.** Find media by source, date, destination, description, or local visual similarity.
 5. **Protect.** Keep the history local, bounded, user-controlled, exportable, and easy to erase.
 
-Capture and cross-site delivery work in the current pre-release build. Local lineage, recall, visual similarity, destination history, workflow reuse, retention, export, and deletion are **in beta and awaiting manual release verification**. Cross-device handoff remains planned and unavailable.
+Capture and cross-site delivery work in the current pre-release build. Post Bundles, Site presets, connected pending-draft replacement, local lineage, recall, visual similarity, destination history, workflow reuse, retention, export, and deletion are **in beta and awaiting manual release verification**. Cross-device Handoff has a development foundation but remains unavailable as a live transport until its pairing, relay, privacy, and security requirements are completed.
 
 ## How UploadFlow works
 
@@ -32,6 +32,38 @@ Capture and cross-site delivery work in the current pre-release build. Local lin
 
 ![Cross-site capture and upload handoff](public/features/cross-site-handoff.png)
 
+## Complete posts and repeatable destinations
+
+### Post Bundles
+
+Post Bundles keep a complete user-approved content package together instead of treating every file as unrelated media. Capture a supported post or build a bundle from selected Media Shelf items, then review:
+
+- Ordered images and videos
+- Title and caption
+- Attribution and links
+- Hashtags
+- Cover and video-cover relationships
+- Per-media alt text
+
+When a compatible destination requests files, UploadFlow can insert the available bundle media in its saved order. Unsupported text fields remain available for manual copy rather than being silently discarded.
+
+### Site presets
+
+Site presets describe repeatable rules for a destination hostname or wildcard hostname pattern. A preset can configure:
+
+- File-count limits and filename templates
+- Image transforms, dimensions, format, and quality
+- Optional Brand Kit and watermark choices
+- Post Bundle title, body, link, and hashtag field selectors
+
+A Site preset prepares and fills a destination draft only after an explicit UploadFlow action. It never submits, schedules, purchases, or publishes the website form.
+
+### Connected pending drafts
+
+Live Draft Sync tracks only files that UploadFlow placed into currently connected, unsubmitted upload inputs. The side panel distinguishes these as pending local attachments. A user can select one corrected file, review every matching destination, and explicitly confirm which open drafts should receive it.
+
+Immediately before replacement, UploadFlow verifies the exact file identity again. Each destination reports success or failure independently, and the previous local attachment remains available for rollback while that receiver stays connected. Submitted, reloaded, disconnected, changed, or identity-mismatched inputs are excluded.
+
 ## One workspace, three surfaces
 
 ### Quick popup
@@ -40,7 +72,7 @@ Capture a URL, inspect recent media, enable or disable interception, and move di
 
 ### Persistent media shelf
 
-The Chrome side panel keeps authorized media references available while moving between tabs. Search, tag, favourite, collect, reorder, select, batch-process, and prepare destination-specific variants.
+The Chrome side panel keeps authorized media references available while moving between tabs. Its tabs provide the Media Shelf, Post Bundles, Handoff foundation, and connected pending drafts. Search, tag, favourite, collect, reorder, select, batch-process, and prepare destination-specific variants.
 
 ![UploadFlow persistent media shelf](public/features/media-shelf-actual.png)
 
@@ -100,11 +132,13 @@ Explicit downloads are handed to Chrome so progress and saving continue safely a
 
 ## Privacy and permissions
 
-Image preparation, metadata review, redaction, cropping, watermarking, duplicate checks, ZIP assembly, batches, platform packs, and FFmpeg Wasm video processing run locally in the extension.
+Image preparation, metadata review, redaction, cropping, watermarking, fingerprint calculation, Post Bundle assembly, ZIP assembly, batches, platform packs, and FFmpeg Wasm video processing run locally in the extension.
 
-Network access occurs only when the user explicitly retrieves a saved source URL or invokes optional AI upscaling. Private workflow history is disabled by default, bounded by the selected retention period, and user-deletable. UploadFlow does not operate an analytics service, advertising service, account system, or cloud media drive.
+Network access occurs only when the user explicitly retrieves a saved source URL, starts an explicit download, or invokes optional AI upscaling. Private Media Memory is optional, bounded by the selected 7, 30, or 90-day retention period, exportable, and user-deletable. It records explicit captures, transformations, versions, and deliveries—not general browsing activity.
 
-The extension requests website access to detect upload inputs and provide user-triggered media inspection across source and destination websites. Storage keeps extension preferences and bounded shelf records. Downloads lets explicit saves continue through Chrome. Side Panel provides the persistent shelf.
+Post Bundles store only the media references and text fields the user approves. Site presets store hostname rules, preparation choices, and optional field selectors; they do not continuously copy values from websites. Live Draft Sync keeps connected-input identity records in session storage and keeps corrected or rollback file bytes only in active extension memory. Its records do not mean that content was published.
+
+The extension requests website access to detect upload inputs, provide user-triggered media inspection, capture explicitly approved Post Bundle fields, apply configured Site preset selectors, and verify confirmed pending-draft replacements across source and destination websites. Storage keeps extension preferences, bounded shelf and bundle records, presets, and optional Media Memory metadata. Downloads lets explicit saves continue through Chrome. Side Panel provides the persistent workspaces.
 
 Read the complete [privacy policy](https://uploadflow.cloudgrids.tech/privacy).
 
