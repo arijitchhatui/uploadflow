@@ -203,7 +203,7 @@ export const featureGroups = [
     eyebrow: '03 · Prepare',
     title: 'Choose the depth the task needs',
     image: '/features/workspace-settings-actual.png',
-    imageLabel: 'Working development build · Settings workspace',
+    imageLabel: 'UploadFlow Extension · Settings workspace',
     copy: 'Use quick actions in the popup, manage several items in the side panel, or open the full workspace. Settings control interception, pickers, editor defaults, presets, brand kits, packs, and optional history.',
     points: [
       'Optimize and convert images',
@@ -217,7 +217,7 @@ export const featureGroups = [
     eyebrow: '04 · Optimize',
     title: 'Make images upload-ready',
     image: '/features/optimize-actual.png',
-    imageLabel: 'Available in current build · Current Optimize workspace',
+    imageLabel: 'UploadFlow Extension · Optimize workspace',
     copy: 'Resize, compress, convert, rename, and remove supported metadata while comparing the current output against the original.',
     points: ['JPEG, PNG, and WebP output choices', 'Independent dimension and quality controls', 'Local metadata scan and clean export']
   },
@@ -226,7 +226,7 @@ export const featureGroups = [
     eyebrow: '05 · Compose',
     title: 'Crop for the destination',
     image: '/features/crop-actual.png',
-    imageLabel: 'Working development build · Beta Crop workspace',
+    imageLabel: 'UploadFlow Extension · Beta Crop workspace',
     copy: 'Prepare square, portrait, landscape, and thumbnail compositions. Focus controls and preview zoom keep framing deliberate before the crop is applied.',
     points: [
       'Reusable destination aspect ratios',
@@ -240,7 +240,7 @@ export const featureGroups = [
     eyebrow: '06 · Protect',
     title: 'Redact private regions',
     image: '/features/redact-actual.png',
-    imageLabel: 'Available in current build · Current Redact workspace',
+    imageLabel: 'UploadFlow Extension · Redact workspace',
     copy: 'Draw blur or cover regions on the original, preview the cleaned result, and apply only after reviewing the before-and-after workspace.',
     points: ['Manual privacy regions', 'Undo, redo, and clear-region controls', 'Temporary preview before applying the output']
   },
@@ -249,7 +249,7 @@ export const featureGroups = [
     eyebrow: '07 · Brand',
     title: 'Apply a reusable watermark',
     image: '/features/watermark-actual.png',
-    imageLabel: 'Available in current build · Current Watermark workspace',
+    imageLabel: 'UploadFlow Extension · Watermark workspace',
     copy: 'Use custom text or a saved brand-kit variant, then control placement, font, colour, alignment, and baseline against a live preview.',
     points: ['Text and brand-kit variants', 'Nine-point positioning', 'Reusable visual identity across outputs']
   },
@@ -258,7 +258,7 @@ export const featureGroups = [
     eyebrow: '08 · Resolve',
     title: 'Upscale when resolution is missing',
     image: '/features/upscale-actual.png',
-    imageLabel: 'Working development build · Network-backed beta',
+    imageLabel: 'UploadFlow Extension · Network-backed feature',
     copy: 'Choose a supported enlargement factor, inspect the estimated output dimensions, and compare the generated result with the original.',
     points: ['2x and supported 4x resolution modes', 'Before-and-after review', 'Explicit network action to the configured processor']
   },
@@ -267,7 +267,7 @@ export const featureGroups = [
     eyebrow: '09 · Scale',
     title: 'Build batches and platform variants',
     image: '/features/batch-packs-actual.png',
-    imageLabel: 'Working development build · Beta side-panel controls',
+    imageLabel: 'UploadFlow Extension · Side-panel controls',
     copy: 'Selected compatible items can enter a bounded queue. Platform packs generate purposeful variants with deterministic names and can be downloaded together as a locally assembled ZIP.',
     points: [
       'Bounded URL and CPU-heavy work concurrency',
@@ -281,9 +281,9 @@ export const featureGroups = [
     eyebrow: '10 · Video',
     title: 'Trim and prepare video locally',
     image: '/features/editor-workspace.png',
-    imageLabel: 'Illustrative interface · Working development feature',
+    imageLabel: 'Illustrative interface · Video feature',
     concept: true,
-    copy: 'The development build uses a packaged FFmpeg Wasm pipeline for trimming, crop, resize, speed, audio, cover-frame selection, and broadly playable MP4 output.',
+    copy: 'UploadFlow uses a packaged FFmpeg Wasm pipeline for trimming, crop, resize, speed, audio, cover-frame selection, and broadly playable MP4 output.',
     points: [
       'Locally bundled worker and Wasm assets',
       'Frame-accurate processing without real-time playback capture',

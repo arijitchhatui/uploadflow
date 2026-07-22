@@ -1,14 +1,14 @@
 export type ProductStatus = 'available' | 'beta' | 'early' | 'experimental' | 'next' | 'planned';
 
 export const productStatus: Record<ProductStatus, { label: string; detail: string }> = {
-  available: { label: 'Ready in build', detail: 'Working in the current pre-release extension build.' },
-  beta: { label: 'In beta', detail: 'Working in the current development build and still being hardened.' },
+  available: { label: 'Available Now', detail: 'Included in the official Chrome Web Store extension.' },
+  beta: { label: 'In beta', detail: 'Available in the extension and actively enhanced.' },
   early: { label: 'Early Access', detail: 'Security and pairing groundwork exists; the complete user workflow is not yet available.' },
   experimental: {
     label: 'Experimental',
-    detail: 'Opt-in development feature for supported upload flows; website compatibility varies.'
+    detail: 'Opt-in feature for supported upload flows; website compatibility varies.'
   },
-  next: { label: 'Coming next', detail: 'Actively being prepared for the next public release.' },
+  next: { label: 'Coming next', detail: 'Actively being prepared for upcoming extension updates.' },
   planned: { label: 'Planned', detail: 'Part of the roadmap, with scope still subject to change.' }
 };
 
@@ -35,7 +35,7 @@ export const editorTools = [
     mark: '□',
     image: '/features/crop-actual.png',
     status: 'beta',
-    screenshot: 'Working development build · Beta UI'
+    screenshot: 'UploadFlow Extension · Beta UI'
   },
   {
     number: '03',
@@ -44,7 +44,7 @@ export const editorTools = [
     mark: '✦',
     image: '/features/redact-actual.png',
     status: 'available',
-    screenshot: 'Available in current build · Current extension UI'
+    screenshot: 'Available in Chrome extension · Current UI'
   },
   {
     number: '04',
@@ -53,7 +53,7 @@ export const editorTools = [
     mark: 'A',
     image: '/features/watermark-actual.png',
     status: 'available',
-    screenshot: 'Available in current build · Current extension UI'
+    screenshot: 'Available in Chrome extension · Current UI'
   },
   {
     number: '05',
@@ -62,7 +62,7 @@ export const editorTools = [
     mark: '⌁',
     image: '/features/upscale-actual.png',
     status: 'beta',
-    screenshot: 'Working development build · Network feature'
+    screenshot: 'UploadFlow Extension · Network feature'
   },
   {
     number: '06',

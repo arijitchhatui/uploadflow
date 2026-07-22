@@ -24,20 +24,19 @@ export default function SupportPage() {
         </p>
 
         <div className="mt-14 space-y-8">
-          <section id="launch-list" className="rounded-2xl border border-[#eefb7a]/25 bg-[#eefb7a]/8 p-6">
-            <p className="text-[9px] font-black uppercase tracking-[.18em] text-[#eefb7a]">Before Chrome Web Store approval</p>
-            <h2 className="mt-3 text-xl">Join the launch list</h2>
+          <section id="install" className="rounded-2xl border border-emerald-500/25 bg-emerald-950/30 p-6">
+            <p className="text-[9px] font-black uppercase tracking-[.18em] text-emerald-400">Chrome Web Store</p>
+            <h2 className="mt-3 text-xl">Install UploadFlow</h2>
             <p className="mt-4 text-sm leading-6 text-white/55">
-              Follow the UploadFlow repository and choose <strong className="text-white">Watch → Custom → Releases</strong> to receive the
-              public-install announcement. The website’s primary button will switch to Add to Chrome when the Web Store URL is available.
+              Install the UploadFlow extension directly from the official Chrome Web Store listing.
             </p>
             <a
-              href="https://github.com/cloudgrids/uploadflow"
+              href="https://chromewebstore.google.com/detail/uploadflow/geaebpfeoobmmdodclaglapichfalifh"
               target="_blank"
               rel="noreferrer"
               className="mt-5 inline-flex min-h-11 items-center rounded-full bg-[#eefb7a] px-5 text-[9px] font-black uppercase tracking-wider text-[#0b0d0f]"
             >
-              Follow launch updates ↗
+              Add to Chrome ↗
             </a>
           </section>
 

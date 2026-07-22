@@ -61,7 +61,7 @@ export function HeroSection() {
               className="h-auto w-full object-contain object-top"
             />
             <figcaption className="border-t border-white/10 px-4 py-3 text-[8px] font-bold uppercase tracking-wider text-white/40">
-              Working development build · Popup, editor, and side-panel architecture
+              UploadFlow Extension · Popup, editor, and side-panel architecture
             </figcaption>
           </figure>
         </div>
@@ -85,11 +85,10 @@ export function AvailableTodaySection() {
   return (
     <section className="border-b border-white/10 bg-[#111416]">
       <div className="mx-auto max-w-360 px-5 py-20 sm:px-8 lg:px-12">
-        <p className="text-[9px] font-black uppercase tracking-[.22em] text-emerald-400">Current development build</p>
+        <p className="text-[9px] font-black uppercase tracking-[.22em] text-emerald-400">Chrome Web Store Extension</p>
         <h2 className="mt-5 text-4xl sm:text-6xl">What is already working</h2>
         <p className="mt-5 max-w-2xl text-sm leading-6 text-white/45">
-          UploadFlow has not been publicly released. These capabilities work in the current pre-release build and are being prepared for the
-          first Chrome Web Store version.
+          UploadFlow is available on the Chrome Web Store. These core capabilities work in the extension build.
         </p>
         <div className="mt-10 grid border-l border-t border-white/15 sm:grid-cols-2">
           {availableToday.map(([title, copy]) => (

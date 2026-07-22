@@ -12,11 +12,11 @@ export function MediaMemorySection() {
             </div>
             <h2 className="mt-5 text-4xl leading-[.92] sm:text-6xl">UploadFlow remembers your media so you do not have to.</h2>
             <p className="mt-6 max-w-xl text-sm leading-6 text-white/45">
-              The development build connects each user-approved capture to where it came from, how it changed, and where the user chose to
-              deliver it. It remains in beta until storage migrations and real cross-site workflows complete manual verification.
+              UploadFlow connects each user-approved capture to where it came from, how it changed, and where the user chose to
+              deliver it.
             </p>
-            <p className="mt-4 text-[9px] font-bold uppercase tracking-wider text-white/30">
-              Working development build · Not included in the public release
+            <p className="mt-4 text-[9px] font-bold uppercase tracking-wider text-emerald-400">
+              Available on the Chrome Web Store
             </p>
           </div>
           <div className="border-t border-white/15">
@@ -142,7 +142,7 @@ export function EditorToolsSection() {
             className="h-auto w-full object-contain object-top"
           />
           <figcaption className="border-t border-white/10 px-4 py-3 text-[8px] font-bold uppercase tracking-wider text-white/35">
-            Working development build · Settings workspace
+            UploadFlow Extension · Settings workspace
           </figcaption>
         </figure>
       </div>
