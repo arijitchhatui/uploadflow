@@ -12,13 +12,11 @@ export const productStatus: Record<ProductStatus, { label: string; detail: strin
   planned: { label: 'Planned', detail: 'Part of the roadmap, with scope still subject to change.' }
 };
 
-export const chromeWebStoreUrl = process.env.NEXT_PUBLIC_CHROME_WEB_STORE_URL;
-export const primaryCta = chromeWebStoreUrl
-  ? { label: 'Add to Chrome', href: chromeWebStoreUrl }
-  : {
-      label: 'Join the launch list',
-      href: process.env.NEXT_PUBLIC_LAUNCH_LIST_URL ?? '/support#launch-list'
-    };
+export const chromeWebStoreUrl = 'https://chromewebstore.google.com/detail/uploadflow/geaebpfeoobmmdodclaglapichfalifh';
+export const primaryCta = {
+  label: 'Add to Chrome',
+  href: chromeWebStoreUrl
+};
 
 export const editorTools = [
   {

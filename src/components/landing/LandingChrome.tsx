@@ -19,6 +19,7 @@ export function LandingHeader() {
           className="hidden items-center gap-7 text-[9px] font-bold uppercase tracking-[.16em] text-white/45 md:flex"
           aria-label="Main navigation"
         >
+          <a href="/test" className="text-[#eefb7a] font-black">Test</a>
           <a href="/how-it-works">How it works</a>
           <a href="/#extension">Extension</a>
           <a href="/#tools">Tools</a>

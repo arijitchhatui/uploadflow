@@ -9,7 +9,7 @@ export function HeroSection() {
         <div className="relative mx-auto grid min-h-[calc(100svh-65px)] max-w-360 items-center gap-14 px-5 py-16 sm:px-8 lg:grid-cols-[.9fr_1.1fr] lg:px-12">
           <div>
             <span className="rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3 py-2 text-[9px] font-bold uppercase tracking-widest text-emerald-300">
-              Pre-release · Not yet on the Chrome Web Store
+              Available on the Chrome Web Store
             </span>
             <h1 className="mt-8 text-[clamp(2.55rem,8vw,6.5rem)] leading-[.86] tracking-[-.065em]">
               Move images &amp; videos
@@ -37,6 +37,12 @@ export function HeroSection() {
                 className="inline-flex min-h-12 items-center gap-3 rounded-full bg-[#eefb7a] px-6 text-[10px] font-black uppercase text-black"
               >
                 {primaryCta.label} <ArrowIcon />
+              </a>
+              <a
+                href="/test"
+                className="inline-flex min-h-12 items-center rounded-full border border-white/15 px-6 text-[10px] font-bold uppercase hover:border-[#eefb7a]/40 hover:text-[#eefb7a]"
+              >
+                Test Page
               </a>
               <a
                 href="/how-it-works"
