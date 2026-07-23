@@ -7,24 +7,24 @@ export function MediaMemorySection() {
         <div className="grid gap-10 lg:grid-cols-[.75fr_1.25fr]">
           <div>
             <div className="flex flex-wrap items-center gap-3">
-              <p className="text-[9px] font-black uppercase tracking-[.22em] text-[#eefb7a]">The browser&apos;s missing media layer</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-[#eefb7a]">The browser&apos;s missing media layer</p>
               <StatusBadge status="beta" />
             </div>
             <h2 className="mt-5 text-4xl leading-[.92] sm:text-6xl">UploadFlow remembers your media so you do not have to.</h2>
-            <p className="mt-6 max-w-xl text-sm leading-6 text-white/45">
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/55">
               UploadFlow connects each user-approved capture to where it came from, how it changed, and where the user chose to
               deliver it.
             </p>
-            <p className="mt-4 text-[9px] font-bold uppercase tracking-wider text-emerald-400">
+            <p className="mt-4 text-xs font-bold uppercase tracking-wider text-emerald-400">
               Available on the Chrome Web Store
             </p>
           </div>
           <div className="border-t border-white/15">
             {mediaMemoryPillars.map(([number, title, copy]) => (
               <article key={number} className="grid gap-3 border-b border-white/15 py-6 sm:grid-cols-[55px_140px_1fr]">
-                <span className="font-mono text-[9px] text-[#eefb7a]">/{number}</span>
+                <span className="font-mono text-xs sm:text-sm font-semibold text-[#eefb7a]">/{number}</span>
                 <h3 className="text-lg">{title}</h3>
-                <p className="text-xs leading-5 text-white/40">{copy}</p>
+                <p className="text-sm leading-relaxed text-white/50">{copy}</p>
               </article>
             ))}
           </div>
@@ -33,7 +33,7 @@ export function MediaMemorySection() {
           {mediaMemoryRoadmap.map((feature) => (
             <span
               key={feature.label}
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/3 px-3 py-2 text-[8px] font-bold uppercase tracking-wider text-white/45"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/3 px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-white/60"
             >
               {feature.label} <StatusBadge status={feature.status} />
             </span>
@@ -49,9 +49,9 @@ export function ProductSurfaceSection() {
     <section className="border-b border-white/10 bg-[#0d1012]">
       <div className="mx-auto w-full max-w-360 px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
         <div className="mb-12 max-w-3xl">
-          <p className="text-[9px] font-black uppercase tracking-[.22em] text-[#eefb7a]">One workflow · three depths</p>
+          <p className="text-xs font-bold uppercase tracking-wider text-[#eefb7a]">One workflow · three depths</p>
           <h2 className="mt-5 text-4xl leading-[.9] sm:text-6xl">Capture quickly. Organize continuously. Edit precisely.</h2>
-          <p className="mt-6 max-w-2xl text-sm leading-6 text-white/45">
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/55">
             The popup, side panel, and full editor share the same local shelf and preparation state, so the tool grows with the task instead
             of forcing every action into one window.
           </p>
@@ -65,12 +65,12 @@ export function ProductSurfaceSection() {
           {productSurfaces.map((surface) => (
             <article key={surface.number} className="min-h-60 border-b border-r border-white/15 p-6 sm:p-8">
               <div className="flex items-center justify-between gap-3">
-                <span className="font-mono text-[9px] text-emerald-400">/{surface.number}</span>
+                <span className="font-mono text-xs sm:text-sm font-semibold text-emerald-400">/{surface.number}</span>
                 <StatusBadge status={surface.status} />
               </div>
               <h3 className="mt-16 text-2xl">{surface.title}</h3>
-              <p className="mt-3 max-w-sm text-xs leading-5 text-white/40">{surface.copy}</p>
-              <p className="mt-4 text-[8px] leading-4 text-white/25">{productStatus[surface.status].detail}</p>
+              <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/50">{surface.copy}</p>
+              <p className="mt-4 text-xs leading-5 text-white/40">{productStatus[surface.status].detail}</p>
             </article>
           ))}
         </div>
@@ -85,10 +85,10 @@ export function EditorToolsSection() {
       <div className="mx-auto w-full max-w-360 px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
         <div className="mb-12 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
           <div>
-            <p className="text-[9px] font-bold uppercase tracking-[.22em] text-emerald-400">Inside the workspace</p>
+            <p className="text-xs font-bold uppercase tracking-wider text-emerald-400">Inside the workspace</p>
             <h2 className="mt-4 text-4xl leading-none sm:text-5xl">Every output can keep moving.</h2>
           </div>
-          <p className="max-w-sm text-sm leading-6 text-white/40">
+          <p className="max-w-sm text-base leading-relaxed text-white/55">
             Choose any compatible editor for the current output, or process selected items as a bounded batch.
           </p>
         </div>
@@ -99,7 +99,7 @@ export function EditorToolsSection() {
               className="group relative min-h-72 border-b border-r border-white/15 p-6 transition hover:bg-[#eefb7a] hover:text-[#0b0d0f] sm:p-7"
             >
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[9px] opacity-35">/{tool.number}</span>
+                <span className="font-mono text-xs opacity-50">/{tool.number}</span>
                 <span className="grid h-10 w-10 place-items-center rounded-xl border border-current/15 text-base font-black">
                   {tool.mark}
                 </span>
@@ -108,7 +108,7 @@ export function EditorToolsSection() {
                 <StatusBadge status={tool.status} />
               </div>
               <h3 className="mt-20 text-2xl">{tool.label}</h3>
-              <p className="mt-3 text-xs leading-5 opacity-45 group-hover:opacity-65">{tool.copy}</p>
+              <p className="mt-3 text-sm leading-relaxed opacity-60 group-hover:opacity-85">{tool.copy}</p>
             </article>
           ))}
         </div>
@@ -125,7 +125,7 @@ export function EditorToolsSection() {
                   loading="lazy"
                   className="h-auto w-full object-contain object-top"
                 />
-                <figcaption className="flex items-center justify-between gap-3 border-t border-white/10 px-4 py-3 text-[8px] font-bold uppercase tracking-wider text-white/35">
+                <figcaption className="flex items-center justify-between gap-3 border-t border-white/10 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white/50">
                   <span>{tool.screenshot}</span>
                   <span className="text-[#eefb7a]">{tool.label}</span>
                 </figcaption>
@@ -141,7 +141,7 @@ export function EditorToolsSection() {
             loading="lazy"
             className="h-auto w-full object-contain object-top"
           />
-          <figcaption className="border-t border-white/10 px-4 py-3 text-[8px] font-bold uppercase tracking-wider text-white/35">
+          <figcaption className="border-t border-white/10 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white/50">
             UploadFlow Extension · Settings workspace
           </figcaption>
         </figure>
@@ -161,7 +161,7 @@ function StatusBadge({ status }: { status: ProductStatus }) {
   };
 
   return (
-    <span className={`inline-flex rounded-full border px-2.5 py-1 text-[7px] font-black uppercase tracking-[.16em] ${styles[status]}`}>
+    <span className={`inline-flex rounded-full border px-3 py-1 text-xs font-extrabold uppercase tracking-wider ${styles[status]}`}>
       {productStatus[status].label}
     </span>
   );

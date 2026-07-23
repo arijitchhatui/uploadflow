@@ -12,16 +12,16 @@ export function FeatureSection({ feature, index }: { feature: GuideFeature; inde
       >
         <div>
           <div className="flex flex-wrap items-center gap-3">
-            <p className="text-[9px] font-black uppercase tracking-[.2em] text-emerald-400">{feature.eyebrow}</p>
-            <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[7px] font-black uppercase tracking-widest text-white/55">
+            <p className="text-xs font-bold uppercase tracking-wider text-emerald-400">{feature.eyebrow}</p>
+            <span className="rounded-full border border-white/15 bg-white/5 px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider text-white/65">
               {productStatus[status].label}
             </span>
           </div>
           <h2 className="mt-5 text-4xl leading-[.92] sm:text-5xl">{feature.title}</h2>
-          <p className="mt-6 max-w-xl text-sm leading-6 text-white/50">{feature.copy}</p>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-white/60">{feature.copy}</p>
           <ul className="mt-8 space-y-3">
             {feature.points.map((point) => (
-              <li key={point} className="flex gap-3 text-xs leading-5 text-white/45">
+              <li key={point} className="flex gap-3 text-sm leading-relaxed text-white/55">
                 <span className="text-[#eefb7a]">
                   <CheckIcon />
                 </span>
@@ -40,7 +40,7 @@ export function FeatureSection({ feature, index }: { feature: GuideFeature; inde
               loading="lazy"
               className="h-auto w-full object-contain object-top"
             />
-            <figcaption className="border-t border-white/10 px-4 py-3 text-[8px] font-bold uppercase tracking-wider text-white/35">
+            <figcaption className="border-t border-white/10 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-white/50">
               {feature.imageLabel ?? `${productStatus[status].label} · ${feature.concept ? 'Prototype interface' : 'Extension workspace'}`}
             </figcaption>
           </figure>

@@ -14,22 +14,22 @@ export default function HowItWorksPage() {
   return (
     <div className="min-h-screen bg-[#0b0d0f] text-white">
       <LandingHeader />
-      <main className="mx-auto max-w-360 px-5 sm:px-8 lg:px-12">
+      <main className="mx-auto max-w-360 px-5 pt-20 sm:px-8 lg:px-12">
         <header className="py-20 sm:py-28">
-          <p className="text-[9px] font-black uppercase tracking-[.22em] text-[#eefb7a]">Product guide</p>
+          <p className="text-xs font-bold uppercase tracking-wider text-[#eefb7a]">Product guide</p>
           <h1 className="mt-6 max-w-5xl text-5xl leading-[.86] sm:text-7xl lg:text-8xl">
             From a webpage
             <br />
             to a ready upload.
           </h1>
-          <p className="mt-8 max-w-2xl text-base leading-7 text-white/50">
+          <p className="mt-8 max-w-2xl text-base sm:text-lg leading-relaxed text-white/60">
             Follow the complete local-first workflow, understand the settings you can control, and see where Chrome or the source website
             sets a capability boundary.
           </p>
-          <nav className="mt-10 flex flex-wrap gap-2" aria-label="Page sections">
+          <nav className="mt-10 flex flex-wrap gap-2.5" aria-label="Page sections">
             <a
               href="#configuration"
-              className="rounded-full border border-[#eefb7a]/35 bg-[#eefb7a]/8 px-4 py-2 text-[8px] font-bold uppercase tracking-wider text-[#eefb7a]"
+              className="rounded-full border border-[#eefb7a]/40 bg-[#eefb7a]/12 px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#eefb7a] transition hover:bg-[#eefb7a]/20"
             >
               Configuration
             </a>
@@ -37,7 +37,7 @@ export default function HowItWorksPage() {
               <a
                 key={feature.id}
                 href={`#${feature.id}`}
-                className="rounded-full border border-white/15 px-4 py-2 text-[8px] font-bold uppercase tracking-wider text-white/55 hover:border-[#eefb7a]/40 hover:text-[#eefb7a]"
+                className="rounded-full border border-white/15 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white/65 hover:border-[#eefb7a]/40 hover:text-[#eefb7a] transition"
               >
                 {feature.title}
               </a>

@@ -42,20 +42,20 @@ export function ShareAndCtaSections() {
       <section id="share" className="border-y border-white/10 bg-[#111416]">
         <div className="mx-auto grid max-w-360 items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[.72fr_1.28fr] lg:px-12">
           <div>
-            <p className="text-[9px] uppercase tracking-widest text-[#eefb7a]">Share the toolkit</p>
+            <p className="text-xs font-bold uppercase tracking-wider text-[#eefb7a]">Share the toolkit</p>
             <h2 className="mt-5 text-5xl">
               A safer upload
               <br />
               is worth sharing.
             </h2>
-            <p className="mt-6 text-sm leading-6 text-white/45">
+            <p className="mt-6 text-base leading-relaxed text-white/55">
               Send UploadFlow to someone who wants control over files before they leave the browser.
             </p>
-            <div className="mt-8 flex flex-wrap gap-2">
-              <button onClick={() => void share()} className="rounded-xl bg-[#eefb7a] px-5 py-3 text-[9px] font-black uppercase text-black">
+            <div className="mt-8 flex flex-wrap gap-3">
+              <button onClick={() => void share()} className="rounded-xl bg-[#eefb7a] px-6 py-3.5 text-xs sm:text-sm font-extrabold uppercase text-black transition hover:bg-[#f4ff94]">
                 Share UploadFlow
               </button>
-              <button onClick={() => void copy()} className="rounded-xl border border-white/15 px-5 py-3 text-[9px] font-black uppercase">
+              <button onClick={() => void copy()} className="rounded-xl border border-white/15 px-6 py-3.5 text-xs sm:text-sm font-extrabold uppercase transition hover:border-white/40">
                 Copy link
               </button>
             </div>
@@ -77,13 +77,13 @@ export function ShareAndCtaSections() {
               href={primaryCta.href}
               target={primaryCta.href.startsWith('http') ? '_blank' : undefined}
               rel={primaryCta.href.startsWith('http') ? 'noreferrer' : undefined}
-              className="inline-flex min-h-12 items-center gap-3 rounded-full bg-black px-6 text-[10px] font-black uppercase text-white"
+              className="inline-flex min-h-12 items-center gap-3 rounded-full bg-black px-6 text-xs sm:text-sm font-extrabold uppercase text-white transition hover:bg-neutral-800"
             >
               {primaryCta.label} <ArrowIcon />
             </a>
             <a
               href="/how-it-works"
-              className="inline-flex min-h-12 items-center rounded-full border border-black/25 px-6 text-[10px] font-black uppercase text-black"
+              className="inline-flex min-h-12 items-center rounded-full border border-black/25 px-6 text-xs sm:text-sm font-extrabold uppercase text-black transition hover:bg-black/10"
             >
               See how it works
             </a>
